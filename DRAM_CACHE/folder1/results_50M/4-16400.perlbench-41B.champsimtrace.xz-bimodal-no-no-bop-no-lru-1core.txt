@@ -1,0 +1,139 @@
+
+*** ChampSim Multicore Out-of-Order Simulator ***
+
+Warmup Instructions: 30000000
+Simulation Instructions: 50000000
+Number of CPUs: 1
+LLC sets: 2048
+LLC ways: 16
+Off-chip DRAM Size: 4096 MB Channels: 1 Width: 64-bit Data Rate: 3200 MT/s
+
+CPU 0 runs ../traces//400.perlbench-41B.champsimtrace.xz
+CPU 0 Bimodal branch predictor
+Heartbeat CPU 0 instructions: 10000003 cycles: 4825905 heartbeat IPC: 2.07215 cumulative IPC: 2.07215 (Simulation time: 0 hr 0 min 16 sec) 
+Heartbeat CPU 0 instructions: 20000001 cycles: 9603672 heartbeat IPC: 2.09303 cumulative IPC: 2.08254 (Simulation time: 0 hr 0 min 32 sec) 
+Heartbeat CPU 0 instructions: 30000001 cycles: 13908660 heartbeat IPC: 2.32289 cumulative IPC: 2.15693 (Simulation time: 0 hr 0 min 48 sec) 
+
+Warmup complete CPU 0 instructions: 30000001 cycles: 13908660 (Simulation time: 0 hr 0 min 48 sec) 
+
+Heartbeat CPU 0 instructions: 40000001 cycles: 26008613 heartbeat IPC: 0.82645 cumulative IPC: 0.82645 (Simulation time: 0 hr 1 min 1 sec) 
+Heartbeat CPU 0 instructions: 50000000 cycles: 37844472 heartbeat IPC: 0.84489 cumulative IPC: 0.835568 (Simulation time: 0 hr 1 min 13 sec) 
+Heartbeat CPU 0 instructions: 60000001 cycles: 48561732 heartbeat IPC: 0.933074 cumulative IPC: 0.865724 (Simulation time: 0 hr 1 min 24 sec) 
+Heartbeat CPU 0 instructions: 70000003 cycles: 60100503 heartbeat IPC: 0.866644 cumulative IPC: 0.865954 (Simulation time: 0 hr 1 min 37 sec) 
+Heartbeat CPU 0 instructions: 80000000 cycles: 71670127 heartbeat IPC: 0.864332 cumulative IPC: 0.865629 (Simulation time: 0 hr 1 min 49 sec) 
+Finished CPU 0 instructions: 50000001 cycles: 57761477 cumulative IPC: 0.865629 (Simulation time: 0 hr 1 min 49 sec) 
+
+ChampSim completed all CPUs
+
+Region of Interest Statistics
+
+CPU 0 cumulative IPC: 0.865629 instructions: 50000001 cycles: 57761477
+L1D TOTAL     ACCESS:   14890356  HIT:   14881854  MISS:       8502
+L1D LOAD      ACCESS:    8289669  HIT:    8281486  MISS:       8183
+L1D RFO       ACCESS:    6600687  HIT:    6600368  MISS:        319
+L1D PREFETCH  ACCESS:          0  HIT:          0  MISS:          0
+L1D WRITEBACK ACCESS:          0  HIT:          0  MISS:          0
+L1D PREFETCH  REQUESTED:          0  ISSUED:          0  USEFUL:          0  USELESS:          0
+L1D AVERAGE MISS LATENCY: 129.506 cycles
+L1I TOTAL     ACCESS:    9490336  HIT:    9483207  MISS:       7129
+L1I LOAD      ACCESS:    9490336  HIT:    9483207  MISS:       7129
+L1I RFO       ACCESS:          0  HIT:          0  MISS:          0
+L1I PREFETCH  ACCESS:          0  HIT:          0  MISS:          0
+L1I WRITEBACK ACCESS:          0  HIT:          0  MISS:          0
+L1I PREFETCH  REQUESTED:          0  ISSUED:          0  USEFUL:          0  USELESS:          0
+L1I AVERAGE MISS LATENCY: 15.6245 cycles
+L2C TOTAL     ACCESS:      23942  HIT:      12438  MISS:      11504
+L2C LOAD      ACCESS:      15312  HIT:      10020  MISS:       5292
+L2C RFO       ACCESS:        319  HIT:         73  MISS:        246
+L2C PREFETCH  ACCESS:       7402  HIT:       1439  MISS:       5963
+L2C WRITEBACK ACCESS:        909  HIT:        906  MISS:          3
+L2C PREFETCH  REQUESTED:       8201  ISSUED:       7681  USEFUL:       2918  USELESS:       1968
+L2C AVERAGE MISS LATENCY: 174.908 cycles
+LLC TOTAL     ACCESS:      13030  HIT:       1777  MISS:      11253
+LLC LOAD      ACCESS:       5193  HIT:        145  MISS:       5048
+LLC RFO       ACCESS:        246  HIT:         30  MISS:        216
+LLC PREFETCH  ACCESS:       6062  HIT:        196  MISS:       5866
+LLC WRITEBACK ACCESS:       1529  HIT:       1406  MISS:        123
+LLC PREFETCH  REQUESTED:          0  ISSUED:          0  USEFUL:         62  USELESS:       5280
+LLC AVERAGE MISS LATENCY: 148.488 cycles
+Major fault: 0 Minor fault: 4111
+CURRENT OFFSET IS 3
+TOTAL SCORES ARE :
+OFFSET -64 has score: 21
+OFFSET -60 has score: 21
+OFFSET -54 has score: 20
+OFFSET -50 has score: 22
+OFFSET -48 has score: 19
+OFFSET -45 has score: 24
+OFFSET -40 has score: 18
+OFFSET -36 has score: 23
+OFFSET -32 has score: 24
+OFFSET -30 has score: 20
+OFFSET -27 has score: 34
+OFFSET -25 has score: 26
+OFFSET -24 has score: 22
+OFFSET -20 has score: 31
+OFFSET -18 has score: 43
+OFFSET -16 has score: 48
+OFFSET -15 has score: 44
+OFFSET -12 has score: 55
+OFFSET -10 has score: 72
+OFFSET -9 has score: 78
+OFFSET -8 has score: 107
+OFFSET -6 has score: 134
+OFFSET -5 has score: 130
+OFFSET -4 has score: 141
+OFFSET -3 has score: 190
+OFFSET -2 has score: 234
+OFFSET -1 has score: 328
+OFFSET 0 has score: 182
+OFFSET 1 has score: 496
+OFFSET 2 has score: 459
+OFFSET 3 has score: 462
+OFFSET 4 has score: 436
+OFFSET 5 has score: 433
+OFFSET 6 has score: 370
+OFFSET 8 has score: 338
+OFFSET 9 has score: 305
+OFFSET 10 has score: 304
+OFFSET 12 has score: 268
+OFFSET 15 has score: 245
+OFFSET 16 has score: 229
+OFFSET 18 has score: 205
+OFFSET 20 has score: 207
+OFFSET 24 has score: 158
+OFFSET 25 has score: 157
+OFFSET 27 has score: 142
+OFFSET 30 has score: 113
+OFFSET 32 has score: 124
+OFFSET 36 has score: 100
+OFFSET 40 has score: 73
+OFFSET 45 has score: 77
+OFFSET 48 has score: 66
+OFFSET 50 has score: 61
+OFFSET 54 has score: 41
+OFFSET 60 has score: 44
+OFFSET 64 has score: 34
+BEST SCORE: 1
+TIME EXCESS: 28
+
+DRAM Statistics
+ CHANNEL 0
+ RQ ROW_BUFFER_HIT:       2518  ROW_BUFFER_MISS:       8612
+ DBUS_CONGESTED:        888
+ WQ ROW_BUFFER_HIT:        479  ROW_BUFFER_MISS:        994  FULL:          0
+
+ AVG_CONGESTED_CYCLE: 6
+
+CPU 0 Branch Prediction Accuracy: 94.9843% MPKI: 10.4068 Average ROB Occupancy at Mispredict: 47.3272
+
+Branch types
+NOT_BRANCH: 39625558 79.2511%
+BRANCH_DIRECT_JUMP: 834286 1.66857%
+BRANCH_INDIRECT: 515416 1.03083%
+BRANCH_CONDITIONAL: 8146353 16.2927%
+BRANCH_DIRECT_CALL: 432753 0.865506%
+BRANCH_INDIRECT_CALL: 6344 0.012688%
+BRANCH_RETURN: 439096 0.878192%
+BRANCH_OTHER: 0 0%
+

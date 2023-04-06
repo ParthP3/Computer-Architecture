@@ -1,0 +1,163 @@
+#include "cache.h"
+
+#define SIZE_RR 64
+#define SCORE_MAX 40
+#define ROUND_MAX 50
+#define MAX_OFFSET 55
+#define DELAY_SIZE 1
+int  offset_list[55] = {-64,-60,-54,-50,-48,-45,-40,-36,-32,-30, -27, -25, -24, -20, -18, -16, -15, -12, -10, -9, -8, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30,32,36,40,45,48,50,54,60,64};
+
+class Table{
+    public:
+    int best_score,time_exces;
+    uint64_t *X;
+    uint64_t *Y;
+    int *score;
+    int *tot_score;
+    uint64_t *delay_arr;
+    int round_number;
+    int headX,headY;
+    int curr_n;
+    bool phase_end;
+    int curr_offset;
+    Table(){
+        best_score=0;
+        time_exces=0;
+        X = new uint64_t[SIZE_RR];
+        Y = new uint64_t[SIZE_RR];
+        delay_arr = new uint64_t[DELAY_SIZE];
+        score = new int[MAX_OFFSET];
+        tot_score = new int[MAX_OFFSET];
+        for(int i =0 ; i<MAX_OFFSET; i++){
+            score[i] = 0;
+            tot_score[i] = 0;
+        }
+        round_number = 0;
+        headX = 0;
+        headY=0;
+        curr_n = 0;
+        phase_end=false;
+        curr_offset = 1;
+    }
+
+    void reset_score(){
+        for(int i =0 ; i<MAX_OFFSET; i++){
+            score[i] = 0;
+        }
+    }
+    
+    bool is_in(uint64_t to_find){
+        for(int i = 0; i<SIZE_RR; i++){
+            if(X[i] == to_find || Y[i] == to_find){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool insert(uint64_t addr){
+        if(delay_arr[DELAY_SIZE-1]!=0){
+            X[headX] = delay_arr[DELAY_SIZE-1];
+            headX = (headX+1)%SIZE_RR;
+        }
+        int temp = DELAY_SIZE-1;
+        while(temp>=0){
+
+            if(temp==0)delay_arr[0] = addr;
+            else delay_arr[temp] = delay_arr[temp-1];
+            temp--;
+        }
+        return true;
+    }
+
+    void add(uint64_t addr){
+        Y[headY] = addr-curr_offset;
+        headY = (headY+1)%SIZE_RR;
+    }
+    
+    int max_score(){
+        int max_off=offset_list[0];
+        int max_val=score[0];
+        for(int i=1;i<MAX_OFFSET;i++){
+            if(score[i]>max_val){
+                max_off = offset_list[i];
+                max_val = score[i];
+            }
+        }
+        return max_off;
+    }
+
+
+    int operate(uint64_t addr){
+        
+        if(is_in(addr-offset_list[curr_n])){
+            score[curr_n]++;
+            tot_score[curr_n]++;
+            if(score[curr_n] == SCORE_MAX) phase_end=true;
+        }
+        curr_n++;
+        if(curr_n == MAX_OFFSET+1){
+            //end of round
+            curr_n=0;
+            round_number++;
+            if(phase_end) best_score++;
+            else if(round_number == ROUND_MAX){
+                phase_end=true;
+                time_exces++;
+            }
+
+            if(phase_end){
+                //phase has ended
+                round_number = 0;
+                curr_offset = max_score();
+                reset_score();
+                phase_end=false;
+            }
+        }
+        insert(addr);
+        return curr_offset;
+    }   
+    void print(){
+        cout<<"CURRENT OFFSET IS "<<curr_offset<<endl;
+        //cout<<"ADDRESSES ARE :"<<endl;
+        //for(int u=0;u<SIZE_RR;u++)cout<<X[u]<<endl;
+        cout<<"TOTAL SCORES ARE :"<<endl;
+        for(int u=0;u<MAX_OFFSET;u++){
+            cout<<"OFFSET "<<offset_list[u]<<" has score: "<<tot_score[u]<<endl;
+        }
+        cout<<"BEST SCORE: "<<best_score<<endl;
+        cout<<"TIME EXCESS: "<<time_exces<<endl;
+
+    }
+};
+
+Table T;
+
+void CACHE::l2c_prefetcher_initialize() 
+{
+
+}
+
+uint32_t CACHE::l2c_prefetcher_operate(uint64_t addr, uint64_t ip, uint8_t cache_hit, uint8_t type, uint32_t metadata_in)
+{   
+    if(cache_hit==0 || ty_prefetch){
+        uint64_t pf_addr = addr >> LOG2_BLOCK_SIZE;
+        int offset = T.operate(pf_addr);
+        pf_addr = pf_addr+offset;
+        prefetch_line(ip, addr, pf_addr<<LOG2_BLOCK_SIZE, FILL_L2, 0);
+    }
+    
+    return metadata_in;
+}
+
+uint32_t CACHE::l2c_prefetcher_cache_fill(uint64_t addr, uint32_t set, uint32_t way, uint8_t prefetch, uint64_t evicted_addr, uint32_t metadata_in)
+{
+
+    T.add(addr>>LOG2_BLOCK_SIZE);
+    return metadata_in;
+}
+
+void CACHE::l2c_prefetcher_final_stats()
+{
+    //T.print();
+}
